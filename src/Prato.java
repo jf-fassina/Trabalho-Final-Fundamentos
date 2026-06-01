@@ -25,13 +25,48 @@ public class Prato {
    */
 
     private String nome;
+    private double valor;
+    private int index; // vai sempre ser a primeira posição que está nula
+    private int qntIngredientes;
     private Ingrediente[] vetIngredientes;
-    private int index;
 
-    public Prato(String nome, Ingrediente[] vetIngredientes, int index) {
+
+    public Prato(String nome, double valor, int qntIngredientes) {
         this.nome = nome;
-        this.vetIngredientes = vetIngredientes;
-        this.index = index;
+        this.valor = valor;
+        this.qntIngredientes = qntIngredientes;
+        this.index = 0;
+        this.vetIngredientes = new Ingrediente[qntIngredientes];
+    }
+
+//    public void nullizarVetIngredientes(){
+//        for (int i = 0; i < this.vetIngredientes.length; i++) {
+//            this.vetIngredientes[i] = null;
+//        }
+//    }
+
+    public boolean adicionarIngrediente(Ingrediente ingrediente) {
+//a) adicionarIngrediente que recebe um Ingrediente e, se houver espaço, adiciona-o ao vetor de
+//ingredientes, retorna true se a inserção pode ser realizada ou false se a inserção não foi possível;
+        if (this.index < this.qntIngredientes) {
+            if (this.vetIngredientes[this.index] == null) {
+                System.out.printf("Erro: Não foi possível adicionar %s, vetor está cheio!\n", ingrediente);
+                return false;
+            } else {
+
+                this.vetIngredientes[this.index] = ingrediente;
+                System.out.printf("Sucesso ao adicionar %s ao vetor!\n", ingrediente);
+                index++;
+                return true;
+            }
+        }
+        //Provavelmente não vai acontecer isso mas é possível se errar em algum outro método.
+        System.out.printf("Erro: IndexOutOfBounds ao adicionar %s ao vetor!\n", ingrediente);
+        return false;
+    }
+
+    public String consultarIngrediente(String nome) {
+
     }
 
 
@@ -43,13 +78,13 @@ public class Prato {
         this.nome = nome;
     }
 
-    public Ingrediente[] getVetIngredientes() {
-        return vetIngredientes;
-    }
-
-    public void setVetIngredientes(Ingrediente[] vetIngredientes) {
-        this.vetIngredientes = vetIngredientes;
-    }
+//    public Ingrediente[] getVetIngredientes() {
+//        return vetIngredientes;
+//    }
+//
+//    public void setVetIngredientes(Ingrediente[] vetIngredientes) {
+//        this.vetIngredientes = vetIngredientes;
+//    }
 
     public int getIndex() {
         return index;
@@ -58,4 +93,14 @@ public class Prato {
     public void setIndex(int index) {
         this.index = index;
     }
+
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
 }
