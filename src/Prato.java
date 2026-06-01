@@ -65,18 +65,54 @@ public class Prato {
         return false;
     }
 
-    public String consultarIngrediente(String nome) {
+    public Ingrediente consultarIngrediente(String nome) {
+//b) consultarIngrediente que recebe o nome do ingrediente, procura-o no vetor de ingredientes e
+//o retorna;
 
+        for (int i = 0; i < this.vetIngredientes.length; i++) {
+            if (i == this.index) break; // ou seja a partir daqui é nulo o vetor
+            if (this.vetIngredientes[i].getNome().equals(nome)) {
+                System.out.printf("Sucesso ao consultar %s ao vetor! Ingrediente encontrado:\n %s\n", nome, this.vetIngredientes[i]);
+                return vetIngredientes[i];
+            }
+        }
+        System.out.printf("Nenhum ingrediente '%s' encontrado!\n", nome);
+        return null;
     }
 
+    //utiliza bubble sort p organizar
+    public boolean reorganizaVetorIngredientes() {
 
-    public String getNome() {
-        return nome;
+        fazer shift left
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public boolean removerIngrediente(String nome) {
+//c) removerIngrediente que recebe o nome do ingrediente, consulta-o no vetor de ingredientes e,
+//ao encontrá-lo, o remove do vetor de ingredientes, fazendo a reorganização do vetor de
+//ingredientes. Retorna true se a remoção foi realizada com sucesso ou false se a remoção não foi
+//possível;
+        for (int i = 0; i < this.vetIngredientes.length; i++) {
+            if (i == this.index) break; // ou seja a partir daqui é nulo o vetor
+            if (this.vetIngredientes[i].getNome().equals(nome)) {
+                this.vetIngredientes[i] = null;
+                System.out.printf("Sucesso ao remover %s ao vetor!\n", nome);
+                reorganizaVetorIngredientes();
+                return true;
+            }
+        }
+        System.out.printf("Nenhum ingrediente '%s' encontrado!\n", nome);
+        return false;
     }
+}
+
+
+public String getNome() {
+    return nome;
+}
+
+public void setNome(String nome) {
+    this.nome = nome;
+}
 
 //    public Ingrediente[] getVetIngredientes() {
 //        return vetIngredientes;
@@ -86,21 +122,21 @@ public class Prato {
 //        this.vetIngredientes = vetIngredientes;
 //    }
 
-    public int getIndex() {
-        return index;
-    }
+public int getIndex() {
+    return index;
+}
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
+public void setIndex(int index) {
+    this.index = index;
+}
 
 
-    public double getValor() {
-        return valor;
-    }
+public double getValor() {
+    return valor;
+}
 
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
+public void setValor(double valor) {
+    this.valor = valor;
+}
 
 }

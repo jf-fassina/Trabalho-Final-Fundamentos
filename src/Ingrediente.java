@@ -32,4 +32,9 @@ public class Ingrediente {
     public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
+
+    @Override
+    public String toString() {
+        return "Nome: " + this.nome + "\nMedida: " + this.medida + "\nQuantidade: " + this.quantidade;
+    }
 }
