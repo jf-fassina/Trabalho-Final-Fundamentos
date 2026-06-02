@@ -50,25 +50,23 @@ public class Prato {
 //ingredientes, retorna true se a inserção pode ser realizada ou false se a inserção não foi possível;
         if (this.index < this.qntIngredientes) {
             if (this.vetIngredientes[this.index] == null) {
-                System.out.printf("Erro: Não foi possível adicionar %s, vetor está cheio!\n", ingrediente);
-                return false;
-            } else {
-
                 this.vetIngredientes[this.index] = ingrediente;
-                System.out.printf("Sucesso ao adicionar %s ao vetor!\n", ingrediente);
+                System.out.printf("Sucesso ao adicionar %s ao vetor!\n", ingrediente.getNome());
                 index++;
                 return true;
+            } else {
+                System.out.printf("Erro: Não foi possível adicionar %s, vetor está cheio!\n", ingrediente.getNome());
+                return false;
             }
         }
         //Provavelmente não vai acontecer isso mas é possível se errar em algum outro método.
-        System.out.printf("Erro: IndexOutOfBounds ao adicionar %s ao vetor!\n", ingrediente);
+        System.out.printf("Erro: IndexOutOfBounds ao adicionar %s ao vetor!\n", ingrediente.getNome());
         return false;
     }
 
     public Ingrediente consultarIngrediente(String nome) {
 //b) consultarIngrediente que recebe o nome do ingrediente, procura-o no vetor de ingredientes e
 //o retorna;
-
         for (int i = 0; i < this.vetIngredientes.length; i++) {
             if (i == this.index) break; // ou seja a partir daqui é nulo o vetor
             if (this.vetIngredientes[i].getNome().equals(nome)) {
@@ -80,10 +78,16 @@ public class Prato {
         return null;
     }
 
-    //utiliza bubble sort p organizar
-    public boolean reorganizaVetorIngredientes() {
-
-        fazer shift left
+    public boolean reorganizaVetorIngredientes(int indexRemovido) {
+        if (this.vetIngredientes[indexRemovido] == null) {
+            for (int i = indexRemovido; i < this.vetIngredientes.length; i++) {
+                this.vetIngredientes[i] = this.vetIngredientes[i + 1];
+            }
+            System.out.printf("Reorganizado a partir do índice '%d'\n", indexRemovido);
+            return true;
+        }
+        System.out.printf("Index '%d' não é um valor nulo\n", indexRemovido);
+        return false;
     }
 
     public boolean removerIngrediente(String nome) {
@@ -96,47 +100,59 @@ public class Prato {
             if (this.vetIngredientes[i].getNome().equals(nome)) {
                 this.vetIngredientes[i] = null;
                 System.out.printf("Sucesso ao remover %s ao vetor!\n", nome);
-                reorganizaVetorIngredientes();
+                reorganizaVetorIngredientes(i);
                 return true;
             }
         }
         System.out.printf("Nenhum ingrediente '%s' encontrado!\n", nome);
         return false;
     }
-}
+
+    public int buscarPosicao(String nome) {
+//d) buscarPosicao que recebe o nome do ingrediente e retorna a posição em que ele está
+//armazenado no vetor de ingredientes. Caso não esteja armazenado, retorna -1;
+        for (int i = 0; i < this.vetIngredientes.length; i++) {
+            if (this.vetIngredientes[i].getNome().equals(nome)) {
+                System.out.printf("Sucesso ao buscar %s no vetor!\nIndex encontrado: %d", nome, i);
+                return i;
+            }
+        }
+        System.out.printf("Nenhum ingrediente '%s' encontrado!\n", nome);
+        return -1;
+    }
 
 
-public String getNome() {
-    return nome;
-}
+    public String getNome() {
+        return nome;
+    }
 
-public void setNome(String nome) {
-    this.nome = nome;
-}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-//    public Ingrediente[] getVetIngredientes() {
-//        return vetIngredientes;
-//    }
-//
-//    public void setVetIngredientes(Ingrediente[] vetIngredientes) {
-//        this.vetIngredientes = vetIngredientes;
-//    }
+    public Ingrediente[] getVetIngredientes() {
+        return vetIngredientes;
+    }
 
-public int getIndex() {
-    return index;
-}
+    public void setVetIngredientes(Ingrediente[] vetIngredientes) {
+        this.vetIngredientes = vetIngredientes;
+    }
 
-public void setIndex(int index) {
-    this.index = index;
-}
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
 
-public double getValor() {
-    return valor;
-}
+    public double getValor() {
+        return valor;
+    }
 
-public void setValor(double valor) {
-    this.valor = valor;
-}
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 
 }
