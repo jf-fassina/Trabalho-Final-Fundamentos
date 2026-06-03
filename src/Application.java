@@ -16,6 +16,54 @@ public class Application {
 
     public static void main(String[] args) {
 
+        Cardapio cardapio = new Cardapio(4);
+
+        Prato arrozEfeijao = new Prato("Arroz e Feijão", 20, 2);
+        Prato bifeDeGado = new  Prato("Bife de Gado", 25, 1);
+        Prato marmita = new Prato("Marmita Completa", 30, 3);
+        Prato estragado =  new Prato("Estragado",  0, 2);
+
+        Ingrediente arroz = new Ingrediente("Arroz", "70g", 10);
+        Ingrediente feijao = new Ingrediente("Feijão", "70g", 10);
+        Ingrediente bife = new Ingrediente("Bife de Gado", "150g", 10);
+
+        Ingrediente podre = new  Ingrediente("Podre", "70g", 1);
+        Ingrediente extra = new Ingrediente("Extra", "70g", 1);
+
+        arrozEfeijao.adicionarIngrediente(arroz);
+        arrozEfeijao.adicionarIngrediente(feijao);
+        arrozEfeijao.adicionarIngrediente(extra);
+        //vai retornar false, erro ao adicionar ingrediente
+        bifeDeGado.adicionarIngrediente(bife);
+
+        marmita.adicionarIngrediente(arroz);
+        marmita.adicionarIngrediente(feijao);
+        marmita.adicionarIngrediente(bife);
+
+        estragado.adicionarIngrediente(podre);
+        estragado.adicionarIngrediente(extra);
+
+        estragado.removerIngrediente(extra.getNome());
+
+
+        cardapio.adicionarPrato(arrozEfeijao);
+        cardapio.adicionarPrato(estragado);
+        cardapio.adicionarPrato(bifeDeGado);
+        cardapio.adicionarPrato(marmita);
+
+        cardapio.removerPrato(estragado.getNome());
+
+        System.out.printf("Prato com menor valor:\n%s\n", cardapio.buscarPratoEconomico().toString());
+
+        Prato[] comFeijao = cardapio.buscarPratoIngrediente(feijao.getNome());
+
+        System.out.println("----------");
+        for (int i = 0; i < comFeijao.length; i++) {
+            System.out.printf("%s\n", comFeijao[i].toString());
+        }
+
+        //TODO: método único
+
 
     }
 }

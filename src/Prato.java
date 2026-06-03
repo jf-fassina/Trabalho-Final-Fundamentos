@@ -7,7 +7,7 @@ public class Prato {
     construtor devem ser atribuídos os valores aos atributos, inicializar o atributo index e instanciar o
     vetor de ingredientes (vetIngredientes) com a quantidade de ingredientes que o prato possui. Crie
     os demais métodos básicos necessários para a classe (estejam atentos ao atributo index que apenas
-    a classe deve ter acesso a ele e ao atributo veIngredientes que terá seus próprios métodos de
+    a classe deve ter acesso a ele e ao atributo vetIngredientes que terá seus próprios métodos de
     acesso, relacionados abaixo). Além do construtor e dos métodos básicos, a classe Prato deve possuir
     os seguintes métodos:
 
@@ -51,7 +51,7 @@ public class Prato {
         if (this.index < this.qntIngredientes) {
             if (this.vetIngredientes[this.index] == null) {
                 this.vetIngredientes[this.index] = ingrediente;
-                System.out.printf("Sucesso ao adicionar %s ao vetor!\n", ingrediente.getNome());
+                System.out.printf("Sucesso ao adicionar %s ao prato '%s'!\n", ingrediente.getNome(), this.nome);
                 index++;
                 return true;
             } else {
@@ -68,7 +68,7 @@ public class Prato {
 //b) consultarIngrediente que recebe o nome do ingrediente, procura-o no vetor de ingredientes e
 //o retorna;
         for (int i = 0; i < this.vetIngredientes.length; i++) {
-            if (i == this.index) break; // ou seja a partir daqui é nulo o vetor
+            if (i >= this.index) break; // ou seja a partir daqui é nulo o vetor
             if (this.vetIngredientes[i].getNome().equals(nome)) {
                 System.out.printf("Sucesso ao consultar %s ao vetor! Ingrediente encontrado:\n %s\n", nome, this.vetIngredientes[i]);
                 return vetIngredientes[i];
@@ -81,12 +81,13 @@ public class Prato {
     public boolean reorganizaVetorIngredientes(int indexRemovido) {
         if (this.vetIngredientes[indexRemovido] == null) {
             for (int i = indexRemovido; i < this.vetIngredientes.length; i++) {
+                if (i+1 < this.vetIngredientes.length)
                 this.vetIngredientes[i] = this.vetIngredientes[i + 1];
             }
             System.out.printf("Reorganizado a partir do índice '%d'\n", indexRemovido);
             return true;
         }
-        System.out.printf("Index '%d' não é um valor nulo\n", indexRemovido);
+        System.out.printf("Index '%d' não contém um valor nulo\n", indexRemovido);
         return false;
     }
 
@@ -99,7 +100,7 @@ public class Prato {
             if (i == this.index) break; // ou seja a partir daqui é nulo o vetor
             if (this.vetIngredientes[i].getNome().equals(nome)) {
                 this.vetIngredientes[i] = null;
-                System.out.printf("Sucesso ao remover %s ao vetor!\n", nome);
+                System.out.printf("Sucesso ao remover %s do vetor!\n", nome);
                 reorganizaVetorIngredientes(i);
                 return true;
             }
@@ -155,4 +156,8 @@ public class Prato {
         this.valor = valor;
     }
 
+    @Override
+    public String toString() {
+        return "Nome: " + this.nome + "\nValor: " + this.valor + "\nQuantidade: " + this.qntIngredientes;
+    }
 }
