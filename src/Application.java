@@ -56,14 +56,20 @@ public class Application {
         System.out.printf("Prato com menor valor:\n%s\n", cardapio.buscarPratoEconomico().toString());
 
         Prato[] comFeijao = cardapio.buscarPratoIngrediente(feijao.getNome());
-
         System.out.println("----------");
-        for (int i = 0; i < comFeijao.length; i++) {
+        for (int i = 0; i < comFeijao.length; i++)
             System.out.printf("%s\n", comFeijao[i].toString());
-        }
+        //claude code foi utilizado para entender o porque comFeijao[i].toString dava nullpointerexception, foi enviado o código do
+        //cardápio com o prompt: Por que buscarPratoComIngrediente retorna o segundo indice como null
+        //resposta → trocar buffer[i]→buffer[count++]
+        System.out.println("---------------------------");
+
+        cardapio.mostrarPratos();
+        //Nota: por algum motivo existem 2 marmitas no cardapio
 
         //TODO: método único
 
-
+        Sistema sys = new Sistema("Restaurante");
+        sys.start();
     }
 }
