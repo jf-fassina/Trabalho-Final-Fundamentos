@@ -70,6 +70,6 @@ public class Application {
         //TODO: método único
 
         Sistema sys = new Sistema("Restaurante");
-        sys.start();
+        sys.start(cardapio);
     }
 }

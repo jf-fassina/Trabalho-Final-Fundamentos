@@ -35,10 +35,8 @@ public class Cardapio {
         for (int i = 0; i <= this.pratos.length - 1; i++)
             if (this.pratos[i] == null) {
                 this.pratos[i] = prato;
-                System.out.printf("%s foi adicionado com sucesso!\n", prato.getNome());
                 return true;
             }
-        System.out.printf("Erro: Não foi possível adicionar %s, vetor está cheio!\n", prato.getNome());
         return false;
     }
 
@@ -48,10 +46,8 @@ public class Cardapio {
                 this.pratos[i] = this.pratos[i + 1];
             }
             this.pratos[this.pratos.length - 1] = null; // limpa a última posição
-            System.out.printf("Reorganizado a partir do índice '%d'\n", indexRemovido);
             return true;
         }
-        System.out.printf("Index '%d' não é um valor nulo\n", indexRemovido);
         return false;
     }
 
@@ -63,12 +59,10 @@ public class Cardapio {
             if (this.pratos[i].getNome().equals(nome)) {
                 this.pratos[i].setVetIngredientes(null);//limpa memória ingredientes
                 this.pratos[i] = null;//limpa memória pratos
-                System.out.printf("Sucesso ao remover %s do vetor!\n", nome);
                 reorganizaVetorPratos(i);
                 return true;
             }
         }
-        System.out.printf("Nenhum prato '%s' encontrado!\n", nome);
         return false;
     }
 
@@ -76,11 +70,9 @@ public class Cardapio {
 // c) buscarPratoPorNome: recebe o nome do prato e retorna o prato que possui este nome;
         for (int i = 0; i < this.pratos.length; i++) {
             if (this.pratos[i].getNome().equals(nome)) {
-                System.out.printf("Sucesso ao buscar %s no vetor!\nIndex encontrado: %d\n", nome, i);
                 return pratos[i];
             }
         }
-        System.out.printf("Nenhum prato '%s' encontrado!\n", nome);
         return null;
     }
 
@@ -89,11 +81,8 @@ public class Cardapio {
 //    Caso não esteja armazenado, retorna o valor -1;
         for (int i = 0; i < this.pratos.length; i++)
             if (this.pratos[i] == prato) {
-                System.out.printf("Sucesso ao buscar %s no vetor!\nIndex encontrado: %d\n", prato.getNome(), i);
                 return i;
             }
-
-        System.out.printf("Nenhum prato '%s' encontrado!\n", prato.getNome());
         return -1;
     }
 
@@ -108,8 +97,7 @@ public class Cardapio {
         int count = 0;
         for (int i = 0; i < this.pratos.length && this.pratos[i] != null; i++)//pratos
             for (int j = 0; j < this.pratos[i].getVetIngredientes().length; j++)//ingredientes
-                if (this.pratos[i].getVetIngredientes()[j].getNome().equals(nome))
-                    buffer[count++] = this.pratos[i];
+                if (this.pratos[i].getVetIngredientes()[j].getNome().equals(nome)) buffer[count++] = this.pratos[i];
         //Erro: buffer[i] → trocado para buffer[count++]
 
         //Aloca a memória para o número de pratos com o ingrediente
@@ -125,8 +113,6 @@ public class Cardapio {
         double soma = 0;
         for (int i = 0; i < this.pratos.length; i++)
             soma += this.pratos[i].getValor();
-
-        System.out.printf("O valor atual do cardápio é R$%d\n", soma);
         return soma;
     }
 
@@ -135,7 +121,6 @@ public class Cardapio {
         Prato menor = new Prato("", Double.MAX_VALUE, 0);
         for (int i = 0; i < this.pratos.length && this.pratos[i] != null; i++)
             if (this.pratos[i].getValor() < menor.getValor()) menor = this.pratos[i];
-
         return menor;
     }
 

@@ -51,16 +51,13 @@ public class Prato {
         if (this.index < this.qntIngredientes) {
             if (this.vetIngredientes[this.index] == null) {
                 this.vetIngredientes[this.index] = ingrediente;
-                System.out.printf("Sucesso ao adicionar %s ao prato '%s'!\n", ingrediente.getNome(), this.nome);
                 index++;
                 return true;
             } else {
-                System.out.printf("Erro: Não foi possível adicionar %s, vetor está cheio!\n", ingrediente.getNome());
                 return false;
             }
         }
         //Provavelmente não vai acontecer isso mas é possível se errar em algum outro método.
-        System.out.printf("Erro: IndexOutOfBounds ao adicionar %s ao vetor!\n", ingrediente.getNome());
         return false;
     }
 
@@ -70,24 +67,20 @@ public class Prato {
         for (int i = 0; i < this.vetIngredientes.length; i++) {
             if (i >= this.index) break; // ou seja a partir daqui é nulo o vetor
             if (this.vetIngredientes[i].getNome().equals(nome)) {
-                System.out.printf("Sucesso ao consultar %s ao vetor! Ingrediente encontrado:\n %s\n", nome, this.vetIngredientes[i]);
                 return vetIngredientes[i];
             }
         }
-        System.out.printf("Nenhum ingrediente '%s' encontrado!\n", nome);
         return null;
     }
 
     public boolean reorganizaVetorIngredientes(int indexRemovido) {
         if (this.vetIngredientes[indexRemovido] == null) {
             for (int i = indexRemovido; i < this.vetIngredientes.length; i++) {
-                if (i+1 < this.vetIngredientes.length)
-                this.vetIngredientes[i] = this.vetIngredientes[i + 1];
+                if (i + 1 < this.vetIngredientes.length)
+                    this.vetIngredientes[i] = this.vetIngredientes[i + 1];
             }
-            System.out.printf("Reorganizado a partir do índice '%d'\n", indexRemovido);
             return true;
         }
-        System.out.printf("Index '%d' não contém um valor nulo\n", indexRemovido);
         return false;
     }
 
@@ -100,12 +93,10 @@ public class Prato {
             if (i == this.index) break; // ou seja a partir daqui é nulo o vetor
             if (this.vetIngredientes[i].getNome().equals(nome)) {
                 this.vetIngredientes[i] = null;
-                System.out.printf("Sucesso ao remover %s do vetor!\n", nome);
                 reorganizaVetorIngredientes(i);
                 return true;
             }
         }
-        System.out.printf("Nenhum ingrediente '%s' encontrado!\n", nome);
         return false;
     }
 
@@ -114,14 +105,11 @@ public class Prato {
 //armazenado no vetor de ingredientes. Caso não esteja armazenado, retorna -1;
         for (int i = 0; i < this.vetIngredientes.length; i++) {
             if (this.vetIngredientes[i].getNome().equals(nome)) {
-                System.out.printf("Sucesso ao buscar %s no vetor!\nIndex encontrado: %d", nome, i);
                 return i;
             }
         }
-        System.out.printf("Nenhum ingrediente '%s' encontrado!\n", nome);
         return -1;
     }
-
 
     public String getNome() {
         return nome;
